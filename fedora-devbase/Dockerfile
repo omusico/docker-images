@@ -1,8 +1,8 @@
 #Dockerfile to generate base image for development on top of Fedora
 FROM fedora:21
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2014.12.27
-RUN yum clean all && yum update -y && yum install -y wget git git-extras vim-enhanced bash-completion man-pages ngrep tar gzip
+ENV BUILD_DATE 2014.12.29
+RUN yum clean all && yum update -y && yum install -y wget git git-extras vim-enhanced bash-completion man-pages ngrep tar gzip subversion
 RUN useradd dev
 WORKDIR /home/dev
 ENV HOME /home/dev
