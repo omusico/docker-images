@@ -1,9 +1,9 @@
 #Dockerfile to generate base image on top of CentOS 7 with Oracle Server JRE
 FROM pcompton/centos-base:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.06.23
+ENV BUILD_DATE 2015.06.27
 ENV JAVA_HOME /opt/jdk1.8.0_45
 ENV PATH $PATH:$JAVA_HOME/bin
-RUN wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u45-b14/server-jre-8u45-linux-x64.tar.gz \
-   && tar xzf server-jre-8u45-linux-x64.tar.gz && mv jdk1.8.0_45 /opt/ && rm server-jre-8u45-linux-x64.tar.gz \
-   && update-alternatives --install "/usr/bin/java" "java" "/opt/jdk1.8.0_45/bin/java" 1
+RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u45-b14/server-jre-8u45-linux-x64.tar.gz > server-jre-8u45-linux-x64.tar.gz \
+  && tar xzf server-jre-8u45-linux-x64.tar.gz && mv jdk1.8.0_45 /opt/ && rm server-jre-8u45-linux-x64.tar.gz \
+  && update-alternatives --install "/usr/bin/java" "java" "/opt/jdk1.8.0_45/bin/java" 1
