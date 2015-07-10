@@ -1,12 +1,12 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/centos-jdk:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.03
+ENV BUILD_DATE 2015.07.10
 ENV GRADLE_HOME /opt/app/gradle
-ENV GRADLE_VERSION 2.4
-ENV JENKINS_VERSION 1.618
+ENV GRADLE_VERSION 2.5
+ENV JENKINS_VERSION 1.619
 ENV JENKINS_HOME /var/jenkins_home
-ENV NODE_VERSION 0.12.5
+ENV NODE_VERSION 0.12.7
 ENV NODE_HOME /opt/app/node
 ENV JAVA_HOME /usr/java/jdk1.8.0_45
 ENV JDK_HOME /usr/java/jdk1.8.0_45
