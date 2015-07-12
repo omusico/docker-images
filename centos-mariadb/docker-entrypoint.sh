@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-chown -R mysql:mysql "$DATADIR"
-
 echo 'Running mysql_install_db ...'
 mysql_install_db --datadir="$DATADIR"
 echo 'Finished mysql_install_db'
