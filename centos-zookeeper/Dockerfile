@@ -1,8 +1,9 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/centos-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.03
+ENV BUILD_DATE 2015.07.07
 ENV ZOOKEEPER_VERSION 3.4.6
+ENV ZK_HOME /opt/zookeeper
 
 RUN curl -fL http://mirror.symnds.com/software/Apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz -o /zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
   && tar xzf zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
