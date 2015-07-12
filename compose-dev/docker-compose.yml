@@ -1,0 +1,6 @@
+jenkins:
+  image: pcompton/centos-jenkins
+  ports:
+   - "8080:8080"
+  volumes:
+   - ./jenkins/jobs:/var/jenkins_home/jobs
