@@ -1,15 +1,15 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/centos-jdk:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.10
+ENV BUILD_DATE 2015.07.15
 ENV GRADLE_HOME /opt/app/gradle
 ENV GRADLE_VERSION 2.5
-ENV JENKINS_VERSION 1.619
+ENV JENKINS_VERSION 1.620
 ENV JENKINS_HOME /var/jenkins_home
 ENV NODE_VERSION 0.12.7
 ENV NODE_HOME /opt/app/node
-ENV JAVA_HOME /usr/java/jdk1.8.0_45
-ENV JDK_HOME /usr/java/jdk1.8.0_45
+ENV JAVA_HOME /usr/java/jdk1.8.0_51
+ENV JDK_HOME /usr/java/jdk1.8.0_51
 
 RUN mkdir -p $JENKINS_HOME/plugins
 RUN mkdir -p $JENKINS_HOME/plugins
@@ -22,7 +22,7 @@ ADD nodejs.xml $JENKINS_HOME/nodejs.xml
 
 RUN chown -R jenkins "$JENKINS_HOME"
 
-RUN yum update -y && yum install -y zip unzip subversion.x86_64 git
+RUN yum update -y && yum install -y zip unzip subversion.x86_64 git && yum clean all
 RUN curl -fL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /gradle-${GRADLE_VERSION}-bin.zip \
     && unzip /gradle-${GRADLE_VERSION}-bin.zip \
     && rm /gradle-${GRADLE_VERSION}-bin.zip \
