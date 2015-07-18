@@ -1,22 +1,27 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/centos-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.07
+ENV BUILD_DATE 2015.07.18
 ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_HOME /opt/zookeeper
+ENV SERVER1 localhost:2888:3888
+ENV CLIENT_PORT 2181
+ENV MYID 1
 
 RUN curl -fL http://mirror.symnds.com/software/Apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz -o /zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
   && tar xzf zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
   && mv /zookeeper-${ZOOKEEPER_VERSION} /opt/zookeeper \
   && rm zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
-  && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
   && mkdir -p /tmp/zookeeper
 
-EXPOSE 2181 2888 3888
+ADD startup.sh /startup.sh
+RUN chmod a+x /startup.sh
+
+EXPOSE 2181 2182 2183 2887 2888 2889 3887 3888 3889
 
 WORKDIR /opt/zookeeper
 
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
-ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
-CMD ["start-foreground"]
+ENTRYPOINT ["/startup.sh"]
+CMD [""]
