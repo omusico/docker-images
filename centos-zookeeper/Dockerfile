@@ -1,4 +1,4 @@
-#Dockerfile to generate jenkins build environment on top of CentOS 7
+#Dockerfile to generate zookeeper node on top of CentOS 7
 FROM pcompton/centos-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
 ENV BUILD_DATE 2015.07.18
