@@ -1,7 +1,7 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/centos-jdk:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.15
+ENV BUILD_DATE 2015.07.20
 ENV GRADLE_HOME /opt/app/gradle
 ENV GRADLE_VERSION 2.5
 ENV JENKINS_VERSION 1.620
@@ -11,7 +11,6 @@ ENV NODE_HOME /opt/app/node
 ENV JAVA_HOME /usr/java/jdk1.8.0_51
 ENV JDK_HOME /usr/java/jdk1.8.0_51
 
-RUN mkdir -p $JENKINS_HOME/plugins
 RUN mkdir -p $JENKINS_HOME/plugins
 RUN useradd -d "$JENKINS_HOME/worker" -u 1000 -m -s /bin/bash jenkins
 RUN mkdir -p $JENKINS_HOME/jobs
@@ -50,6 +49,12 @@ RUN curl -fL http://updates.jenkins-ci.org/latest/run-condition.hpi -o $JENKINS_
 RUN curl -fL http://updates.jenkins-ci.org/latest/token-macro.hpi -o $JENKINS_HOME/plugins/token-macro.hpi
 RUN curl -fL http://updates.jenkins-ci.org/latest/scm-api.hpi -o $JENKINS_HOME/plugins/scm-api.hpi
 RUN curl -fL http://updates.jenkins-ci.org/latest/deploy.hpi -o $JENKINS_HOME/plugins/deploy.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/artifactory.hpi -o $JENKINS_HOME/plugins/artifactory.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/docker-plugin.hpi -o $JENKINS_HOME/plugins/docker-plugin.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/ssh-slaves.hpi -o $JENKINS_HOME/plugins/ssh-slaves.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/ssh-credentials.hpi -o $JENKINS_HOME/plugins/ssh-credentials.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/credentials.hpi -o $JENKINS_HOME/plugins/credentials.hpi
+RUN curl -fL http://updates.jenkins-ci.org/latest/durable-task.hpi -o $JENKINS_HOME/plugins/durable-task.hpi
 
 VOLUME $JENKINS_HOME/jobs
 
