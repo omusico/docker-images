@@ -1,19 +1,19 @@
 #Dockerfile to generate Ubuntu Vivid Vervet command line workspace
-FROM pcompton/vivid-base:latest
+FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.24
+ENV BUILD_DATE 2015.07.25
 ENV ZOOKEEPER_VERSION 3.4.6
-ENV ZK_HOME /opt/zookeeper
-ENV KAFKA_VERSION 0.8.2.1
-ENV KAFKA_HOME /opt/kafka
+ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
 ENV SCALA_VERSION 2.11
+ENV KAFKA_VERSION 0.8.2.1
+ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
 ENV JAVA_HOME /opt/jdk1.8.0_51
 ENV JDK_HOME /opt/jdk1.8.0_51
-ENV GRADLE_HOME /opt/app/gradle
 ENV GRADLE_VERSION 2.5
+ENV GRADLE_HOME /opt/gradle-${GRADLE_VERSION}-bin
 
-RUN apt-get update && apt-get dist-upgrade -y
-RUN apt-get install -y apt-transport-https
+RUN echo "deb http://archive.ubuntu.com/ubuntu vivid universe" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install -y apt-transport-https
 
 RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 RUN echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" > /etc/apt/sources.list.d/docker.list
@@ -27,28 +27,17 @@ RUN apt-get clean
 
 RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify
 
-RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.tar.gz > jdk-8u51-linux-x64.tar.gz
-RUN tar xzf jdk-8u51-linux-x64.tar.gz && mv jdk1.8.0_51 /opt/ && rm jdk-8u51-linux-x64.tar.gz
+RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.tar.gz | tar -xzC /opt
 RUN update-alternatives --install "/usr/bin/java" "java" "/opt/jdk1.8.0_51/bin/java" 1
 RUN update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk1.8.0_51/bin/javac" 1
 RUN update-alternatives --install "/usr/bin/javadoc" "javadoc" "/opt/jdk1.8.0_51/bin/javadoc" 1
 
-RUN curl -fL -o /zookeeper.tar.gz http://mirror.symnds.com/software/Apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz \
-  && tar xzf zookeeper.tar.gz \
-  && mv /zookeeper-${ZOOKEEPER_VERSION} /opt/zookeeper \
-  && rm zookeeper.tar.gz
+RUN curl -fL http://mirror.symnds.com/software/Apache/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzC /opt
 
-RUN curl -fl -o /kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz http://mirrors.advancedhosters.com/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
-  && tar xzf kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz \
-  && mv kafka_${SCALA_VERSION}-${KAFKA_VERSION} /opt/kafka \
-  && rm kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz
+RUN curl -fL http://mirrors.advancedhosters.com/apache/kafka/${KAFKA_VERSION}/kafka_${SCALA_VERSION}-${KAFKA_VERSION}.tgz | tar -xzC /opt
 
 RUN curl -fL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /gradle-${GRADLE_VERSION}-bin.zip \
-  && unzip /gradle-${GRADLE_VERSION}-bin.zip \
-  && rm /gradle-${GRADLE_VERSION}-bin.zip \
-  && mkdir -p /opt/app/gradle \
-  && cp -r gradle*/* /opt/app/gradle/ \
-  && rm gradle* -rf
+  && unzip /gradle-${GRADLE_VERSION}-bin.zip -d /opt
 
 ENV PATH ${ZK_HOME}/bin:${KAFKA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin
 
