@@ -1,7 +1,7 @@
 #Dockerfile to generate Ubuntu Vivid Vervet command line workspace
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.25
+ENV BUILD_DATE 2015.07.27
 ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
 ENV SCALA_VERSION 2.11
@@ -11,6 +11,8 @@ ENV JAVA_HOME /opt/jdk1.8.0_51
 ENV JDK_HOME /opt/jdk1.8.0_51
 ENV GRADLE_VERSION 2.5
 ENV GRADLE_HOME /opt/gradle-${GRADLE_VERSION}-bin
+ENV NODE_VERSION 0.12.7
+ENV NODE_HOME /opt/node
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu vivid universe" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y apt-transport-https
@@ -19,13 +21,9 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 RUN echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update
 
-RUN apt-get install -y golang ssh-client make golang-go.net-dev golang-go.crypto-dev docker-engine
-RUN apt-get install -y clang llvm lldb gcc autoconf automake clang-format-3.6 clang-modernize-3.6
-RUN apt-get install -y vim git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc
-RUN apt-get install -y mlocate gnupg2 bzip2 unzip zip nodejs npm mariadb-client
+RUN apt-get install -y golang ssh-client make golang-go.net-dev golang-go.crypto-dev docker-engine clang llvm lldb gcc autoconf automake clang-format-3.6 clang-modernize-3.6
+RUN apt-get install -y vim git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc mlocate gnupg2 bzip2 unzip zip mariadb-client python pylint python-doc python-nose idle
 RUN apt-get clean
-
-RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify
 
 RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.tar.gz | tar -xzC /opt
 RUN update-alternatives --install "/usr/bin/java" "java" "/opt/jdk1.8.0_51/bin/java" 1
@@ -39,7 +37,12 @@ RUN curl -fL http://mirrors.advancedhosters.com/apache/kafka/${KAFKA_VERSION}/ka
 RUN curl -fL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /gradle-${GRADLE_VERSION}-bin.zip \
   && unzip /gradle-${GRADLE_VERSION}-bin.zip -d /opt
 
-ENV PATH ${ZK_HOME}/bin:${KAFKA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin
+RUN curl -fL http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz | tar xzC /opt \
+  && mv /opt/node-v${NODE_VERSION}-linux-x64 /opt/node
+
+ENV PATH ${ZK_HOME}/bin:${KAFKA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin:${NODE_HOME}/bin
+
+RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine
 
 ENV HOME /home/pcompton
 RUN useradd --create-home --home-dir $HOME pcompton
@@ -50,13 +53,12 @@ ADD .bash_prompt $HOME/.bash_prompt
 ADD .bash_profile $HOME/.bash_profile
 ADD .bashrc $HOME/.bashrc
 ADD .gitconfig $HOME/.gitconfig
-RUN mkdir -p $HOME/.vim/autoload \
-  && mkdir -p $HOME/.vim/bundle \
-  && mkdir -p $HOME/.ssh \
-  && mkdir -p $HOME/mount \
-  && curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim \
-  && git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csapprox \
-  && git clone https://github.com/mattn/gist-vim.git $HOME/.vim/bundle/gist-vim \
+RUN mkdir -p $HOME/.vim/autoload
+RUN mkdir -p $HOME/.vim/bundle
+RUN mkdir -p $HOME/.ssh
+RUN mkdir -p $HOME/mount
+RUN curl -fLo $HOME/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+RUN git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csapprox \
   && git clone https://github.com/vim-scripts/Tabmerge.git $HOME/.vim/bundle/Tabmerge \
   && git clone https://github.com/vim-scripts/ZoomWin.git $HOME/.vim/bundle/ZoomWin \
   && git clone https://github.com/mileszs/ack.vim.git $HOME/.vim/bundle/ack.vim \
@@ -78,7 +80,6 @@ RUN mkdir -p $HOME/.vim/autoload \
   && git clone https://github.com/MattesGroeger/vim-bookmarks.git $HOME/.vim/bundle/vim-bookmarks \
   && git clone https://github.com/t9md/vim-choosewin.git $HOME/.vim/bundle/vim-choosewin \
   && git clone https://github.com/tpope/vim-classpath.git $HOME/.vim/bundle/vim-classpath \
-  && git clone https://github.com/guns/vim-clojure-static.git $HOME/.vim/bundle/vim-clojure-static \
   && git clone https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/bundle/vim-colors-solarized \
   && git clone https://github.com/tpope/vim-commentary.git $HOME/.vim/bundle/vim-commentary \
   && git clone https://github.com/tpope/vim-dispatch.git $HOME/.vim/bundle/vim-dispatch \
@@ -96,11 +97,13 @@ RUN mkdir -p $HOME/.vim/autoload \
   && git clone https://github.com/fatih/vim-go.git $HOME/.vim/bundle/vim-go \
   && git clone https://github.com/tomasr/molokai.git $HOME/.vim/bundle/molokai \
   && git clone https://github.com/Chiel92/vim-autoformat.git $HOME/.vim/bundle/vim-autoformat \
+  && git clone https://github.com/janko-m/vim-test.git $HOME/.vim/bundle/vim-test.git \
+  && git clone https://github.com/rking/ag.vim.git $HOME/.vim/bundle/ag.vim.git \
   && chown -R pcompton:pcompton $HOME
 
 WORKDIR $HOME
 
-VOLUME $HOME/mount $HOME/.ssh
+VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $HOME/repos $HOME/.ssh
 
 USER pcompton
 
