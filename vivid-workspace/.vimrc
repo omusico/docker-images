@@ -122,7 +122,7 @@ filetype plugin indent on " required by Pathogen Plugin Manager
 
 " Theme
 set background=dark
-colorscheme Tomorrow-Night-Blue
+colorscheme Tomorrow-Night
 
 " vim-autoformat
 noremap <F3> :Autoformat<CR>

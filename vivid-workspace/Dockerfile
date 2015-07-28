@@ -103,7 +103,7 @@ RUN git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csappr
 
 WORKDIR $HOME
 
-VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $HOME/repos $HOME/.ssh
+VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $Home/Dropbox $Home/OneDrive $HOME/repos $HOME/.ssh
 
 USER pcompton
 
