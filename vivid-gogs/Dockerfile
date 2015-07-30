@@ -1,7 +1,7 @@
 #Dockerfile to generate gogs/git container
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.26
+ENV BUILD_DATE 2015.07.30
 ENV GOGS_VERSION 0.6.1
 ENV ADMIN_USER_CREATE true
 ENV ADMIN_USER_NAME gadmin
@@ -22,7 +22,7 @@ RUN chmod +x /opt/gogs/gogs
 RUN useradd -mr git
 RUN mkdir -p /home/git/.ssh
 ADD authorized_keys /home/git/.ssh/authorized_keys
-RUN mkdir -p /opt/gogs/data /opt/gogs/custom/conf /opt/gogs/log 
+RUN mkdir -p /opt/gogs/data /opt/gogs/custom/conf /opt/gogs/log
 RUN chown -R git:git /opt/gogs/data /opt/gogs/custom/conf/ /opt/gogs/log /home/git
 RUN chmod 0700 /home/git/.ssh && chmod 0600 /home/git/.ssh/*
 
