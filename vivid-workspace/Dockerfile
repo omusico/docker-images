@@ -1,7 +1,7 @@
 #Dockerfile to generate Ubuntu Vivid Vervet command line workspace
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.27
+ENV BUILD_DATE 2015.07.30
 ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
 ENV SCALA_VERSION 2.11
@@ -21,8 +21,8 @@ RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 581
 RUN echo "deb https://apt.dockerproject.org/repo ubuntu-vivid main" > /etc/apt/sources.list.d/docker.list
 RUN apt-get update
 
-RUN apt-get install -y golang ssh-client make golang-go.net-dev golang-go.crypto-dev docker-engine clang llvm lldb gcc autoconf automake clang-format-3.6 clang-modernize-3.6
-RUN apt-get install -y vim git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc mlocate gnupg2 bzip2 unzip zip mariadb-client python pylint python-doc python-nose idle
+RUN apt-get install -y golang ssh-client make golang-go.net-dev golang-go.crypto-dev docker-engine clang llvm lldb gcc autoconf automake clang-format-3.6 clang-modernize-3.6 manpages manpages-dev man-db
+RUN apt-get install -y vim vim-doc vim-scripts git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc mlocate gnupg2 bzip2 unzip zip mariadb-client python pylint python-doc python-nose idle
 RUN apt-get clean
 
 RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.tar.gz | tar -xzC /opt
@@ -103,7 +103,7 @@ RUN git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csappr
 
 WORKDIR $HOME
 
-VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $Home/Dropbox $Home/OneDrive $HOME/repos $HOME/.ssh
+VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $Home/Dropbox $Home/OneDrive $HOME/repos $HOME/.boot2docker $HOME/.ssh
 
 USER pcompton
 
