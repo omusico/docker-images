@@ -1,10 +1,10 @@
 #Dockerfile to generate jenkins build environment on top of CentOS 7
 FROM pcompton/vivid-jdk:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.26
+ENV BUILD_DATE 2015.07.30
 ENV GRADLE_VERSION 2.5
 ENV GRADLE_HOME /opt/gradle-${GRADLE_VERSION}-bin
-ENV JENKINS_VERSION 1.621
+ENV JENKINS_VERSION 1.622
 ENV JENKINS_HOME /var/jenkins_home
 ENV NODE_VERSION 0.12.7
 ENV NODE_HOME /opt/node
