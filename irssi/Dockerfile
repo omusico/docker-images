@@ -1,7 +1,7 @@
-#Image for irssi on Ubuntu
+#Image for irssi on Ubuntu Vivid Vervet
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.30
+ENV BUILD_DATE 2015.08.03
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu vivid universe" >> /etc/apt/sources.list && apt-get update && \
  apt-get install -y readline-common && apt-get install -y irssi irssi-plugin-otr irssi-scripts && apt-get clean
