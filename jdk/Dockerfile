@@ -1,7 +1,7 @@
 #Dockerfile to generate base image on top of Ubuntu with Oracle JDK
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.30
+ENV BUILD_DATE 2015.08.03
 
 RUN curl -v -j -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.tar.gz | tar -xzC /opt
 
