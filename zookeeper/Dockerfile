@@ -1,7 +1,7 @@
 #Dockerfile to generate zookeeper node on top of CentOS 7
 FROM pcompton/vivid-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.07.30
+ENV BUILD_DATE 2015.08.03
 ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
 ENV SERVER1 localhost:2888:3888
