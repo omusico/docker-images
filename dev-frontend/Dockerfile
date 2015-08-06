@@ -1,7 +1,7 @@
 #Dockerfile to generate Front End Dev Environment
 FROM pcompton/dev-base:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.04
+ENV BUILD_DATE 2015.08.06
 ENV NODE_VERSION 0.12.7
 ENV NODE_HOME /opt/node
 
@@ -12,7 +12,7 @@ RUN curl -fL http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux
 
 ENV PATH ${NODE_HOME}/bin:${PATH}
 
-RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine jshint
+RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine jshint babel
 
 USER pcompton
 

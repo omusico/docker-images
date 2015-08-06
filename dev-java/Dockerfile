@@ -1,7 +1,7 @@
 #Dockerfile to generate Java Dev Environment
 FROM pcompton/dev-base:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.03
+ENV BUILD_DATE 2015.08.06
 ENV JAVA_HOME /opt/jdk1.8.0_51
 ENV JDK_HOME /opt/jdk1.8.0_51
 ENV GRADLE_VERSION 2.5
@@ -24,7 +24,7 @@ RUN curl -fL http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux
 
 ENV PATH ${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin:${NODE_HOME}/bin
 
-RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine
+RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine babel
 
 USER pcompton
 
