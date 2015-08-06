@@ -1,7 +1,7 @@
 #Dockerfile to generate Ubuntu Vivid Vervet Base Image for Developement
 FROM pcompton/vivid:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.03
+ENV BUILD_DATE 2015.08.06
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu vivid universe" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y manpages manpages-dev man-db vim vim-doc vim-scripts git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc mlocate gnupg2 bzip2 unzip zip && apt-get clean
@@ -60,7 +60,8 @@ RUN git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csappr
   && git clone https://github.com/tomasr/molokai.git $HOME/.vim/bundle/molokai \
   && git clone https://github.com/Chiel92/vim-autoformat.git $HOME/.vim/bundle/vim-autoformat \
   && git clone https://github.com/janko-m/vim-test.git $HOME/.vim/bundle/vim-test.git \
-  && git clone https://github.com/rking/ag.vim.git $HOME/.vim/bundle/ag.vim.git \
+  && git clone https://github.com/rking/ag.vim.git $HOME/.vim/bundle/ag.vim \
+  && git clone https://github.com/mxw/vim-jsx.git $HOME/.vim/bundle/vim-jsx \
   && chown -R pcompton:pcompton $HOME
 
 WORKDIR $HOME

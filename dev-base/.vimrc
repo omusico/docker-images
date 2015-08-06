@@ -147,6 +147,9 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " CtrlP -> directories to ignore when fuzzy finding
 let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
 
+" vim-jsx
+let g:jsx_ext_required = 0
+
 " Ack (uses Ag behind the scenes)
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
