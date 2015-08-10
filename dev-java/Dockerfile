@@ -1,7 +1,7 @@
 #Dockerfile to generate Java Dev Environment
 FROM pcompton/dev-base:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.06
+ENV BUILD_DATE 2015.08.10
 ENV JAVA_HOME /opt/jdk1.8.0_51
 ENV JDK_HOME /opt/jdk1.8.0_51
 ENV GRADLE_VERSION 2.5
@@ -22,7 +22,9 @@ RUN curl -fL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-
 RUN curl -fL http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz | tar xzC /opt \
   && mv /opt/node-v${NODE_VERSION}-linux-x64 /opt/node
 
-ENV PATH ${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin:${NODE_HOME}/bin
+RUN curl -fL http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/1.2.5.RELEASE/spring-boot-cli-1.2.5.RELEASE-bin.tar.gz | tar xzC /opt
+
+ENV PATH ${GRADLE_HOME}/bin:${PATH}:${JAVA_HOME}/bin:${NODE_HOME}/bin:/opt/spring-boot-cli-1.2.5.RELEASE/bin
 
 RUN npm install -g grunt-cli grunt gulp bower typescript less js-beautify jasmine babel
 
