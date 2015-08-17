@@ -1,7 +1,7 @@
 #Dockerfile to generate Ubuntu Vivid Vervet Base Image for Developement
-FROM pcompton/vivid:latest
+FROM pcompton/ubuntu:vivid
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.06
+ENV BUILD_DATE 2015.08.17
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu vivid universe" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y manpages manpages-dev man-db vim vim-doc vim-scripts git git-extras git-flow wget num-utils silversearcher-ag jq gawk gawk-doc mlocate gnupg2 bzip2 unzip zip && apt-get clean
@@ -66,7 +66,7 @@ RUN git clone https://github.com/godlygeek/csapprox.git $HOME/.vim/bundle/csappr
 
 WORKDIR $HOME
 
-VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $Home/Dropbox $Home/OneDrive $HOME/repos $HOME/.boot2docker $HOME/.docker $HOME/.ssh
+VOLUME $HOME/bin $HOME/Docker $HOME/Downloads $Home/Dropbox $HOME/repos $HOME/.boot2docker $HOME/.docker $HOME/.ssh
 
 USER pcompton
 
