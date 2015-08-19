@@ -1,7 +1,7 @@
 #Dockerfile to generate a kafka images on top of Vivid
 FROM pcompton/server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.03
+ENV BUILD_DATE 2015.08.19
 ENV SCALA_VERSION 2.11
 ENV KAFKA_VERSION 0.8.2.1
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
