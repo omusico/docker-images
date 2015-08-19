@@ -1,8 +1,8 @@
 #Dockerfile to generate Go Dev Environment
 FROM pcompton/dev-base:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.03
-ENV GO_VERSION 1.4.2
+ENV BUILD_DATE 2015.08.19
+ENV GO_VERSION 1.5
 ENV GOROOT /opt/go
 ENV GOPATH ${HOME}/go
 
