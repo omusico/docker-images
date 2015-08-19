@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.621</version>
+  <version>1.624</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -13,8 +13,8 @@
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
   <jdks>
     <jdk>
-      <name>JDK 1.8u51</name>
-      <home>/opt/jdk1.8.0_51</home>
+      <name>JDK 1.8u60</name>
+      <home>/opt/jdk1.8.0_60</home>
       <properties/>
     </jdk>
   </jdks>
