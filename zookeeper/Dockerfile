@@ -1,7 +1,7 @@
-#Dockerfile to generate zookeeper node on top of Ubuntu Vivid
-FROM pcompton/server-jre:latest
+#Dockerfile to generate zookeeper node on top of Arch Linux
+FROM pcompton/jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.19
+ENV BUILD_DATE 2015.08.26
 ENV ZOOKEEPER_VERSION 3.4.6
 ENV ZK_HOME /opt/zookeeper-${ZOOKEEPER_VERSION}
 ENV SERVER1 localhost:2888:3888
