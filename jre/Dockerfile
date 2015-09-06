@@ -1,6 +1,7 @@
-#Dockerfile to generate base jre image on Arch Linux
-FROM pcompton/archlinux
+#Dockerfile to generate base jre image on Fedora
+FROM pcompton/fedora:22
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.26
+ENV BUILD_DATE 2015.09.06
 
-RUN pacman -S jre8-openjdk-headless --noconfirm
+RUN dnf install -y java-1.8.0-openjdk-headless.x86_64
+
