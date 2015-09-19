@@ -2,7 +2,7 @@
 <hudson.plugins.gradle.Gradle_-DescriptorImpl plugin="gradle@1.24">
   <installations>
     <hudson.plugins.gradle.GradleInstallation>
-      <name>Gradle-2.6</name>
+      <name>Gradle-2.7</name>
       <home>/opt/gradle</home>
       <properties/>
       <gradleHome>/opt/gradle</gradleHome>
