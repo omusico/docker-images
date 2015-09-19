@@ -1,7 +1,7 @@
-#Dockerfile to generate a kafka images on top of Arch Linux
+#Dockerfile to generate a kafka node
 FROM pcompton/jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.08.25
+ENV BUILD_DATE 2015.09.19
 ENV SCALA_VERSION 2.11
 ENV KAFKA_VERSION 0.8.2.1
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
