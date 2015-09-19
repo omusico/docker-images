@@ -25,7 +25,7 @@ ADD nodejs.xml $JENKINS_HOME/nodejs.xml
 
 RUN chown -R jenkins "$JENKINS_HOME"
 
-RUN dnf upgrade && dnf install -y zip unzip subversion git && dnf clean
+RUN dnf upgrade && dnf install -y zip unzip subversion git && dnf clean all
 RUN curl -fL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o /gradle-${GRADLE_VERSION}-bin.zip \
     && unzip /gradle-${GRADLE_VERSION}-bin.zip -d /opt && mv /opt/gradle-${GRADLE_VERSION} /opt/gradle \
     && rm /gradle-${GRADLE_VERSION}-bin.zip
