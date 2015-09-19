@@ -1,5 +1,5 @@
 #Dockerfile to generate a kafka node
-FROM pcompton/jre:latest
+FROM pcompton/oracle-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
 ENV BUILD_DATE 2015.09.19
 ENV SCALA_VERSION 2.11
