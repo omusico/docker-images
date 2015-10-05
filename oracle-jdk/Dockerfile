@@ -1,7 +1,7 @@
 #Dockerfile to generate JDK Base Image
 FROM pcompton/fedora:22
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.09.19
+ENV BUILD_DATE 2015.10.05
 ENV JAVA_HOME /opt/jdk1.8.0_60
 ENV JDK_HOME /opt/jdk1.8.0_60
 
