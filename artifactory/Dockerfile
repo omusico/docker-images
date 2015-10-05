@@ -1,8 +1,8 @@
 #Dockerfile to generate artifactory instance
 FROM pcompton/oracle-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.09.19
-ENV ARTIFACTORY_VERSION 4.1.0
+ENV BUILD_DATE 2015.10.05
+ENV ARTIFACTORY_VERSION 4.1.3
 ENV ARTIFACTORY_HOME /opt/artifactory
 
 RUN dnf install -y unzip
