@@ -2,7 +2,7 @@
 <jenkins.plugins.nodejs.NodeJSPlugin plugin="nodejs@0.2.1">
   <installations>
     <jenkins.plugins.nodejs.tools.NodeJSInstallation>
-      <name>Node-4.1.0</name>
+      <name>Node-4.1.1</name>
       <home>/opt/node</home>
       <properties/>
       <nodeJSHome>/opt/node</nodeJSHome>
