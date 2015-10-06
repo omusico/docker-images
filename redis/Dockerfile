@@ -1,6 +1,7 @@
 #Dockerfile to generate redis instance
 FROM pcompton/oracle-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
+ENV BUILD_DATE 2015.10.06
 ENV REDIS_VERSION 3.0.4
 ENV REDIS_DOWNLOAD_SHA1 cccc58b2b8643930840870f17280fcae57ed7675
 
@@ -23,7 +24,7 @@ RUN mkdir -p /usr/src/redis \
 	&& rm redis.tar.gz \
 	&& make -C /usr/src/redis \
 	&& make -C /usr/src/redis install \
-	&& rm -r /usr/src/redis 
+	&& rm -r /usr/src/redis
 
 RUN mkdir /data && chown redis:redis /data
 VOLUME /data

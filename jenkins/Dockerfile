@@ -1,12 +1,12 @@
 #Dockerfile to generate jenkins build environment
 FROM pcompton/oracle-jdk:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.10.05
+ENV BUILD_DATE 2015.10.06
 ENV GRADLE_VERSION 2.7
 ENV GRADLE_HOME /opt/gradle-${GRADLE_VERSION}-bin
-ENV JENKINS_VERSION 1.631
+ENV JENKINS_VERSION 1.632
 ENV JENKINS_HOME /var/jenkins_home
-ENV NODE_VERSION 4.1.1
+ENV NODE_VERSION 4.1.2
 ENV NODE_HOME /opt/node
 ENV MAVEN_VERSION 3.3.3
 ENV MAVEN_HOME /opt/apache-maven-${MAVEN_VERSION}

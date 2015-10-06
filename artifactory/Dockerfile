@@ -1,7 +1,7 @@
 #Dockerfile to generate artifactory instance
 FROM pcompton/oracle-server-jre:latest
 MAINTAINER Phil Compton <me@philcompton.com>
-ENV BUILD_DATE 2015.10.05
+ENV BUILD_DATE 2015.10.06
 ENV ARTIFACTORY_VERSION 4.1.3
 ENV ARTIFACTORY_HOME /opt/artifactory
 
