@@ -16,7 +16,7 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 	&& rm /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu
 
-RUN dnf install -y make
+RUN dnf install -y make gcc
 
 # for redis-sentinel see: http://redis.io/topics/sentinel
 RUN mkdir -p /usr/src/redis \
